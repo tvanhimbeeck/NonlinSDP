@@ -10,6 +10,10 @@ Copyright (C) 2022 Thomas Van Himbeeck (Licence: GLPv3)
 ### Convex optimisation problems
 The present algorithm finds solutions to convex optimisation problems of the form
 $$
+            f(x)
+$$
+
+$$
 \begin{align}
             \minimize_{X}   &f(X)
             \mathrm{subject to}   &tr[X A_i] = b_i
