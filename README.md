@@ -9,11 +9,14 @@ Copyright (C) 2022 Thomas Van Himbeeck (Licence: GLPv3)
 
 ### Convex optimisation problems
 The present algorithm finds solutions to convex optimisation problems of the form
-
-            minimize_{X}   f(X)
-              subject to   tr[X A_i] = b_i
-                           tr[X C_j] <= d_j
-                           X >=0
+$$
+\begin{align}
+            \minimize_{X}   &f(X)
+            \mathrm{subject to}   &tr[X A_i] = b_i
+                           &tr[X C_j] <= d_j
+                           &X >=0
+\end{align}
+$$
 where *f(X)* is a **convex matrix function** and *X* is a hermitian matrix of subject to **semidefinite constraints**, ie. it is positive semidefinite (*X >=0*) and satisfies linear equality and inequality constraints. This is also known as *convex nonlinear semidefinite programming*.
 
 ### Function library
