@@ -50,9 +50,8 @@ for some known constant $`M`$ and for all $`X \in P(d)\succ 0, V\in H(d)`$, wher
 (in progress)
 
 ### History
-June 2022: start development
-
-January 2024: public release
+- January 2024: Public release
+- June 2022: start development
 
 ### References
 1. T. Van Himbeeck (in preparation)
