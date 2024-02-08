@@ -1,5 +1,5 @@
 # NonlinSDP
-Solver solutions for convex nonlinear semidefinite programming in MATLAB with applications to key rate calculations in  *Quantum Key Distribution* and other entropic optimisation problems.
+Interior-point solver for convex nonlinear optimisation over the semidefinite cone.
 
 Copyright (C) 2024 Thomas Van Himbeeck (Licence: GLPv3)
 
