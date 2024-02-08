@@ -9,8 +9,8 @@ The present algorithm finds solutions to convex optimisation problems of the for
 \begin{align}
             \text{minimize}_{X} : &\  f(X)\\
             \text{subject to} :   &\ \mathrm{tr}[X A_i] = b_i\\
-                                  &\ \mathrm{tr}[X C_j] <= d_j\\
-                                  &\ X >=0
+                                  &\ \mathrm{tr}[X C_j] \leq d_j\\
+                                  &\ X \succeq 0
 \end{align}
 ```
 where 
