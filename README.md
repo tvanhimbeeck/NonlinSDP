@@ -30,15 +30,13 @@ A real convex or concave matrix functions is *concordant* if it satisfies the fo
 ```math
 d^3 f(X)[V] \leq M |V|_X \cdot |d^2 f(X)[V]|
 ```
-for some known constant $`M`$ and for all $`X \in P(d)\succ 0, V\in H(d)`$, where $`d^k f(X)[V]`$ is the $k$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$.
-
-The concordance property is closed under addition, muliplication by a positive constant, and the transformation $f(X)\mapsto f(AXA^\dagger)$.
+for some known constant $`M`$ and for all $`X \in P(d)\succ 0, V\in H(d)`$, where $`d^k f(X)[V]`$ is the $k$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$. The set of convex (or concave) *concordant* functions is closed under addition, muliplication by a positive constant, and the transformation $f(X)\mapsto f(AXA^\dagger)$.
 
 ## Solvers 
 
 | Type | Convergence | requirements | reference |
 | -- | -- | -- | -- |
-|(Path-following) interior-point | super-exponential $o(\log(1/\epsilon))$ | first and second order derivative, concordance property | [1,2] |
+|Interior-point | super-exponential $o(\log(1/\epsilon))$ | first and second order derivative, concordance property | [1,2] |
 |Frank-Wolve | polynomial $O(polylog(1/\epsilon))$ | first  derivative and <a href="http://cvxr.com/cvx/">CVX <a> package |  |
 
 ### Benchmarking
