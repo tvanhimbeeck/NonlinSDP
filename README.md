@@ -31,40 +31,16 @@ Any concave/convex matrix function satisfy the following *concordance* property 
 ```math
 d^3 f(X)[V] \leq M |V|_X \cdot |d^2 f(X)[V]|
 ```
-for some known constant $`M`$ and for all $`X \in P(d)\succ 0, V\in H(d)`$, where $`d^k f(X)[V]`$ is the $`k`$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$.
+for some known constant $`M`$ and for all $`X \in P(d)\succ 0, V\in H(d)`$, where $`d^k f(X)[V]`$ is the $k$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$.
 
-The concordance property is closed under addition, muliplication by a positive constant, and the transformation $`f(X)\mapsto f(AXA^\dagger)$.
+The concordance property is closed under addition, muliplication by a positive constant, and the transformation $f(X)\mapsto f(AXA^\dagger)$.
 
+### Solvers
+- Interior-point solver : super-exponential convergence $o(\log(1/\epsilon))$, requires first and second order derivative and concordance property. Based on [1,2].
+- Frank-Wolve solver : polynomial convergence $O(polylog(1/\epsilon))$, requires first order derivative [2] and <a href="http://cvxr.com/cvx/">CVX <a> package.
 
-### Jointly-convex optimisation problems
-The code also supports extentions of this problem such as jointly-convex matrix functions
+### Benchmarking
 
-            minimize_{X}   g(X,Y)
-              subject to   tr[X A_i] + tr[Y B_i] = c_i
-                           tr[X D_j] + tr[Y E_j] <= f_j
-                           X,Y >=0
-where *g(X,Y)* is a **joint-convex matrix function** and *X* and *Y* semidefinite hermiatian matrices that satisfy joint linear equality and inequality constaints.
-
-## Interior-point solver
-
-### Features
-
-#### Dual-problem / Lower-bounds
-Upper- and lower- bound are provided on the optimal solution, that agree up to the desired precision.
-
-#### Similar to Semidefinite programming
-The code is based on standard state-of-the-art path-following interior-point algorithm. The same type algorithms are behind the efficient solvers for Semidefinite programming.
-
-#### Exponential convergence
-The path-following interior-point algorithm behind this code guaranties exponential convergence: The running time of the code is O(log(1/epsilon)), where epsilon is the desired precision. Moreover, the expected running time can be estimated at the start as the algorithm returns an upper-bound on the number of search iteration needed to reach a given precision.
-
-### Workings
-The code is based on standard state-of-the-art path-following interior-point algorithm. A self-concordant barrier function is constructed for the epigraph of the matrix function.
-
-The code is based on the interior-point path following.
-
-### Improvements
-
-It is expected that running time improvements could be obtained in the future.
-
-### Provide code it is based on
+### References
+1. T. Van Himbeeck (in preparation)
+1. Y. Nesterov, Lectures on convex optimisation
