@@ -26,10 +26,10 @@ This library provides the following a library of functions
 
 | Function | formula | concavity | condition |
 | -------- |-------- | --------- | --------- |
-| von Neumann entropy | $`S(X) = tr[ X log(X)]`$  | concave | |
-| trace function | $`t(X) = \Tr[ f(X)]`$ | convex | $`f(x)`$ is convex|
-| keyrate function    | $`h(X) = S(X) - \sum_{i} S(K{i} X K_{i}^\dagger)`$ | convex| $`\sum_i K_i^\dagger K_i = \mathbf{1}`$|
-| keyrate Renyi entropy | $` q_{\alpha}(X) = \sum_i \mathrm{tr}[(K_i X^{\frac{1/\alpha}} K_i^\dagger)^\alpha] `$|concave| |
+| von Neumann entropy | $`S(X) = \mathrm{tr}[ X log(X)]`$  | concave | |
+| trace function | $`t(X) = \mathrm{tr}[ f(X)]`$ | convex | $`f(x)`$ is convex|
+| keyrate function    | $`h(X) = S(X) - \sum_{i} S(K{i} X K_{i}^\dagger)`$ | convex| $`\sum_{i} K_{i}^\dagger K_{i} = \mathbf{1}`$|
+| keyrate Renyi entropy | $`q_{\alpha}(X) = \sum_{i} \mathrm{tr}[(K_{i} X^{\frac{1}{\alpha}} K_{i}^\dagger)^\alpha] `$|concave| |
 
 where 
 Other convex functions can be added to the function library provided they satisfy a technical assumption called concordance (see below), and the derivative and hessian are given.
