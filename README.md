@@ -1,26 +1,22 @@
-# quantum-ip-solver
-Interior-point solver for convex nonlinear semidefinite programming in MATLAB
+# NonlinSDP
+Solver solutions for convex nonlinear semidefinite programming in MATLAB
 
 with applications to key rate calculations in  *Quantum Key Distribution* and other entropic optimisation problems.
 
-Copyright (C) 2022 Thomas Van Himbeeck (Licence: GLPv3)
+Copyright (C) 2024 Thomas Van Himbeeck (Licence: GLPv3)
 
 ## Applications
 
 ### Convex optimisation problems
 The present algorithm finds solutions to convex optimisation problems of the form
-$$
-            f(x)
-$$
+$$f(x)$$
 
-$$
-\begin{align}
+$$\begin{align}
             \minimize_{X}   &f(X)
             \mathrm{subject to}   &tr[X A_i] = b_i
                            &tr[X C_j] <= d_j
                            &X >=0
-\end{align}
-$$
+\end{align}$$
 where *f(X)* is a **convex matrix function** and *X* is a hermitian matrix of subject to **semidefinite constraints**, ie. it is positive semidefinite (*X >=0*) and satisfies linear equality and inequality constraints. This is also known as *convex nonlinear semidefinite programming*.
 
 ### Function library
