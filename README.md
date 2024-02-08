@@ -10,18 +10,18 @@ The present algorithm finds solutions to convex optimisation problems of the for
 ```math
 \begin{align}
             \min_{X}   &f(X)\\
-            \operatorname{subject to}   &tr[X A_i] = b_i
+            \mathrm{subject to}   &tr[X A_i] = b_i
                            &tr[X C_j] <= d_j
                            &X >=0
 \end{align}
 ```
 where 
-- $`X`$ is a hermitian matrix of subject to **semidefinite constraints**: it is positive semidefinite ($`X \subsec 0`$) and satisfies linear equality and inequality constraints
-- $`f(X)`$ is a convex real matrix function on the positive semidefinite cone satisfying the concordance property
+- $`X\in \mathrm{H}`$ is a hermitian matrix of subject to **semidefinite constraints**
+- $`f(X)`:\mathrm{H} \rightarrow \mathbb{R}$ is a convex real matrix function **compatible with the semidefinite barier**: 
 ```math
-d^3 f(X)[V] \leq d^2 f(X)[V] ||X^{-1/2}VX^{-1/2}||_2
+d^3 f(X)[V] \leq d^2 f(X)[V] |V|_X
 ```
-
+for all $`X \succ 0`$
 
 ## Function library
 The solver provides a library of functions
