@@ -14,14 +14,10 @@ The present algorithm finds solutions to convex optimisation problems of the for
 \end{align}
 ```
 where 
-- $`X\in \mathrm{H(d)}`$ is a hermitian matrix of dimension d of subject to **semidefinite constraints**
-- $`f(X)`:\mathrm{H(d)} \rightarrow \mathbb{R}`$ is a convex real matrix **compatible with the semidefinite barier**, ie.\ such that
-```math
-d^2 f(X)[V] \leq |V|_X \cdot d^2 f(X)[V]  \qquad \text{, for all } 
-```
-for all $`X \succ 0, V\in H(d)`$ where $`d^k f(X)[V]`$ is the $`k`$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$
+- $`X\in \mathrm{H(d)}`$ is a hermitian matrix of dimension $`d`$ of subject to *semidefinite constraints*
+- $` f(X):\mathrm{H(d)} \rightarrow \mathbb{R}`$ is a convex *concordant* real matrix function 
 
-### Function library
+### Concordant function library
 This library provides the following a library of functions
 
 | Function | formula | concavity | condition |
@@ -29,10 +25,13 @@ This library provides the following a library of functions
 | von Neumann entropy | $`S(X) = \mathrm{tr}[ X log(X)]`$  | concave | |
 | trace function | $`t(X) = \mathrm{tr}[ f(X)]`$ | convex | $`f(x)`$ is convex|
 | keyrate function    | $`h(X) = S(X) - \sum_{i} S(K{i} X K_{i}^\dagger)`$ | convex| $`\sum_{i} K_{i}^\dagger K_{i} = \mathbf{1}`$|
-| keyrate Renyi entropy | $`q_{\alpha}(X) = \sum_{i} \mathrm{tr}[(K_{i} X^{\frac{1}{\alpha}} K_{i}^\dagger)^\alpha] `$|concave| |
+| keyrate Renyi entropy | $`q_{\alpha}(X) = \sum_{i} \mathrm{tr}[(K_{i} X^{\frac{1}{\alpha}} K_{i}^\dagger)^\alpha] `$|concave| $`\sum_{i} K_{i}^\dagger K_{i} = \mathbf{1}`$ |
 
-where 
-Other convex functions can be added to the function library provided they satisfy a technical assumption called concordance (see below), and the derivative and hessian are given.
+Any other convex real matrix function defined on the positive semidefinite cone can be added if it is *compatible with semidefinite barier*, ie. when
+```math
+d^2 f(X)[V] \leq c |V|_X \cdot d^2 f(X)[V]  \qquad \text{, for all } 
+```
+for all $`X \succ 0, V\in H(d)`$ where $`d^k f(X)[V]`$ is the $`k`$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$ and some known constant $`c`$.
 
 ### Jointly-convex optimisation problems
 The code also supports extentions of this problem such as jointly-convex matrix functions
