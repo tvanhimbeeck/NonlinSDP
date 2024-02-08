@@ -15,10 +15,10 @@ The present algorithm finds solutions to convex optimisation problems of the for
 ```
 where 
 - $`X\in \mathrm{H(d)}`$ is a hermitian matrix of dimension $`d`$ of subject to *semidefinite constraints*
-- $` f(X):\mathrm{H(d)} \rightarrow \mathbb{R}`$ is a convex *concordant* real matrix function 
+- $` f(X):\mathrm{P(d)} \rightarrow \mathbb{R}`$ is a convex *concordant* real matrix function defined on the positive semidefinite cone
 
 ### Concordant function library
-This library provides the following a library of functions
+This library provides the following a library of compatible functions
 
 | Function | formula | concavity | condition |
 | -------- |-------- | --------- | --------- |
@@ -27,11 +27,14 @@ This library provides the following a library of functions
 | keyrate function    | $`h(X) = S(X) - \sum_{i} S(K{i} X K_{i}^\dagger)`$ | convex| $`\sum_{i} K_{i}^\dagger K_{i} = \mathbf{1}`$|
 | keyrate Renyi entropy | $`q_{\alpha}(X) = \sum_{i} \mathrm{tr}[(K_{i} X^{\frac{1}{\alpha}} K_{i}^\dagger)^\alpha] `$|concave| $`\sum_{i} K_{i}^\dagger K_{i} = \mathbf{1}`$ |
 
-Any other convex real matrix function defined on the positive semidefinite cone can be added if it is *compatible with semidefinite barier*, ie. when
+Any concave/convex matrix function satisfy the following *concordance* property can be added. Concordance
 ```math
-d^2 f(X)[V] \leq c |V|_X \cdot d^2 f(X)[V]  \qquad \text{, for all } 
+d^3 f(X)[V] \leq c |V|_X \cdot |d^2 f(X)[V]|
 ```
-for all $`X \succ 0, V\in H(d)`$ where $`d^k f(X)[V]`$ is the $`k`$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$ and some known constant $`c`$.
+for some known constant $`c`$ and for all $`X \in P(d)\succ 0, V\in H(d)`$, where $`d^k f(X)[V]`$ is the $`k`$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$.
+
+The concordance property is closed under addition, muliplication by a positive constant, and the transformation $`f(X)\mapsto f(AXA^\dagger)$.
+
 
 ### Jointly-convex optimisation problems
 The code also supports extentions of this problem such as jointly-convex matrix functions
