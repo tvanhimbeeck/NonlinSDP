@@ -24,9 +24,9 @@ This library provides the following a library of compatible functions
 
 | Function | formula | concavity | condition |
 | -------- |-------- | --------- | --------- |
-| von Neumann entropy | $`S(X) = \mathrm{tr}[ X log(X)]`$  | concave | |
+| von Neumann entropy | $`S(X) = \mathrm{tr}[ X \log(X)]`$  | concave | |
 | trace function | $`t(X) = \mathrm{tr}[ f(X)]`$ | convex | $`f(x)`$ is convex|
-| keyrate function    | $`h(X) = S(X) - \sum_{i} S(K{i} X K_{i}^\dagger)`$ | convex| $`\sum_{i} K_{i}^\dagger K_{i} = \mathbf{1}`$|
+| keyrate function    | $`h(X) = S(X) - \sum_{i} S(K_{i} X K_{i}^\dagger)`$ | convex| $`\sum_{i} K_{i}^\dagger K_{i} = \mathbf{1}`$|
 | keyrate Renyi entropy | $`q_{\alpha}(X) = \sum_{i} \mathrm{tr}[(K_{i} X^{\frac{1}{\alpha}} K_{i}^\dagger)^\alpha] `$|concave| $`\sum_{i} K_{i}^\dagger K_{i} = \mathbf{1}`$ |
 
 Any concave/convex matrix function satisfy the following *concordance* property can be added:
