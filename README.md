@@ -1,9 +1,7 @@
-# NonlinSDP
+## NonlinSDP
 Interior-point solver for convex nonlinear optimisation over the semidefinite cone.
 
 Copyright (C) 2024 Thomas Van Himbeeck (Licence: GLPv3)
-
-## Scope
 
 ### Convex nonlinear semidefinite programming 
 The present algorithm finds solutions to convex optimisation problems of the form
@@ -19,17 +17,16 @@ where
 - $`X\in \mathrm{H(d)}`$ is a hermitian matrix of dimension $`d`$ of subject to *semidefinite constraints*
 - $` f(X):\mathrm{P(d)} \rightarrow \mathbb{R}`$ is a convex *concordant* real matrix function defined on the positive semidefinite cone
 
-### Concordant function library
-This library provides the following a library of compatible functions
-
+### Function library
+Library of *concordant* matrix functions 
 | Function | formula | concavity | condition |
 | -------- |-------- | --------- | --------- |
 | von Neumann entropy | $`S(X) = \mathrm{tr}[ X \log(X)]`$  | concave | |
-| trace function | $`t(X) = \mathrm{tr}[ f(X)]`$ | convex | $`f(x)`$ is convex|
+| trace function | $`t(X) = \mathrm{tr}[ f(X)]`$ | convex | |
 | keyrate function    | $`h(X) = S(X) - \sum_{i} S(K_{i} X K_{i}^\dagger)`$ | convex| $`\sum_{i} K_{i}^\dagger K_{i} = \mathbf{1}`$|
 | keyrate Renyi entropy | $`q_{\alpha}(X) = \sum_{i} \mathrm{tr}[(K_{i} X^{\frac{1}{\alpha}} K_{i}^\dagger)^\alpha] `$|concave| $`\sum_{i} K_{i}^\dagger K_{i} = \mathbf{1}`$ |
 
-Any concave/convex matrix function satisfy the following *concordance* property can be added:
+A real convex or concave matrix functions is *concordant* if it satisfies the following third order condition
 ```math
 d^3 f(X)[V] \leq M |V|_X \cdot |d^2 f(X)[V]|
 ```
