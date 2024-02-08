@@ -1,7 +1,5 @@
 # NonlinSDP
-Solver solutions for convex nonlinear semidefinite programming in MATLAB
-
-with applications to key rate calculations in  *Quantum Key Distribution* and other entropic optimisation problems.
+Solver solutions for convex nonlinear semidefinite programming in MATLAB with applications to key rate calculations in  *Quantum Key Distribution* and other entropic optimisation problems.
 
 Copyright (C) 2024 Thomas Van Himbeeck (Licence: GLPv3)
 
@@ -9,10 +7,10 @@ Copyright (C) 2024 Thomas Van Himbeeck (Licence: GLPv3)
 The present algorithm finds solutions to convex optimisation problems of the form
 ```math
 \begin{align}
-            \text{minimize}_{X}&f(X)\\
-            \text{subject to}  &tr[X A_i] = b_i\\
-                               &tr[X C_j] <= d_j\\
-                               &X >=0
+            \text{minimize}_{X}& f(X)\\
+            \text{subject to}  & tr[X A_i] = b_i\\
+                               & tr[X C_j] <= d_j\\
+                               & X >=0
 \end{align}
 ```
 where 
