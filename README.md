@@ -27,11 +27,11 @@ This library provides the following a library of compatible functions
 | keyrate function    | $`h(X) = S(X) - \sum_{i} S(K{i} X K_{i}^\dagger)`$ | convex| $`\sum_{i} K_{i}^\dagger K_{i} = \mathbf{1}`$|
 | keyrate Renyi entropy | $`q_{\alpha}(X) = \sum_{i} \mathrm{tr}[(K_{i} X^{\frac{1}{\alpha}} K_{i}^\dagger)^\alpha] `$|concave| $`\sum_{i} K_{i}^\dagger K_{i} = \mathbf{1}`$ |
 
-Any concave/convex matrix function satisfy the following *concordance* property can be added. Concordance
+Any concave/convex matrix function satisfy the following *concordance* property can be added:
 ```math
-d^3 f(X)[V] \leq c |V|_X \cdot |d^2 f(X)[V]|
+d^3 f(X)[V] \leq M |V|_X \cdot |d^2 f(X)[V]|
 ```
-for some known constant $`c`$ and for all $`X \in P(d)\succ 0, V\in H(d)`$, where $`d^k f(X)[V]`$ is the $`k`$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$.
+for some known constant $`M`$ and for all $`X \in P(d)\succ 0, V\in H(d)`$, where $`d^k f(X)[V]`$ is the $`k`$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$.
 
 The concordance property is closed under addition, muliplication by a positive constant, and the transformation $`f(X)\mapsto f(AXA^\dagger)$.
 
