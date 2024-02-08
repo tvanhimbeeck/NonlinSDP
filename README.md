@@ -3,6 +3,8 @@ Solver solutions for convex nonlinear semidefinite programming in MATLAB with ap
 
 Copyright (C) 2024 Thomas Van Himbeeck (Licence: GLPv3)
 
+## Scope
+
 ### Convex nonlinear semidefinite programming 
 The present algorithm finds solutions to convex optimisation problems of the form
 ```math
@@ -35,9 +37,12 @@ for some known constant $`M`$ and for all $`X \in P(d)\succ 0, V\in H(d)`$, wher
 
 The concordance property is closed under addition, muliplication by a positive constant, and the transformation $f(X)\mapsto f(AXA^\dagger)$.
 
-### Solvers
-- Interior-point solver : super-exponential convergence $o(\log(1/\epsilon))$, requires first and second order derivative and concordance property. Based on [1,2].
-- Frank-Wolve solver : polynomial convergence $O(polylog(1/\epsilon))$, requires first order derivative [2] and <a href="http://cvxr.com/cvx/">CVX <a> package.
+## Solvers 
+
+| Type | Convergence | requirements | reference |
+| -- | -- | -- | -- |
+|(Path-following) interior-point | super-exponential $o(\log(1/\epsilon))$ | first and second order derivative, concordance property | [1,2] |
+|Frank-Wolve | polynomial $O(polylog(1/\epsilon))$ | first  derivative and <a href="http://cvxr.com/cvx/">CVX <a> package |  |
 
 ### Benchmarking
 
