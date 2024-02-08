@@ -3,7 +3,7 @@ Solver solutions for convex nonlinear semidefinite programming in MATLAB with ap
 
 Copyright (C) 2024 Thomas Van Himbeeck (Licence: GLPv3)
 
-## Convex nonlinear semidefinite programming 
+### Convex nonlinear semidefinite programming 
 The present algorithm finds solutions to convex optimisation problems of the form
 ```math
 \begin{align}
@@ -17,17 +17,19 @@ where
 - $`X\in \mathrm{H(d)}`$ is a hermitian matrix of dimension d of subject to **semidefinite constraints**
 - $`f(X)`:\mathrm{H(d)} \rightarrow \mathbb{R}`$ is a convex real matrix **compatible with the semidefinite barier**, ie.\ such that
 ```math
-d^2 f(X)[V] \leq d^2 f(X)[V] |V|_X \qquad \text{, for all } X \succ 0, V\in H(d)
+d^2 f(X)[V] \leq |V|_X \cdot d^2 f(X)[V]  \qquad \text{, for all } 
 ```
-where $`d^k f(X)[V]`$ is the $`k`$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$
+for all $`X \succ 0, V\in H(d)`$ where $`d^k f(X)[V]`$ is the $`k`$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$
 
-## Function library
-The solver provides a library of functions
+### Function library
+This library provides the following a library of functions
 
-| Function | formula | concavity |
-| -------- |-------- | --------- |
-| von Neumann entropy | S(X) = tr[ X log(X)]  | concave |
-| keyrate function    | \sum_p S(K_p X K_p) - \sum_{kp} S
+| Function | formula | concavity | condition |
+| -------- |-------- | --------- | --------- |
+| von Neumann entropy | $`S(X) = tr[ X log(X)]`$  | concave | |
+| trace function | $`t(X) = \Tr[ f(X)] | convex | $`f(x)`$ is convex|
+| keyrate function    | $`h(X) = S(X) - \sum_{kp} S(K{i} X K_{i}^\dagger)`$ | convex| \sum_i K_i^\dagger K_i = \mathbf 1|
+| keyrate Renyi entropy | $`q_\alpha = \sum_i \mathrm{tr}[(K_i X^{\frac{1/\alpha}} K_i^\dagger)^\alpha] `$|concave|
 
 Other convex functions can be added to the function library provided they satisfy a technical assumption called concordance (see below), and the derivative and hessian are given.
 
