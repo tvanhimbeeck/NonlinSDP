@@ -41,7 +41,7 @@ for some known constant $`M`$ and all Hermitian $`X,V`$ where $`X \succeq 0 `$. 
 | Type | Convergence | requirements | reference |
 | -- | -- | -- | -- |
 |Interior-point | super-exponential $o(\log(1/\epsilon))$ | first and second order derivative, concordance property | [1,2] |
-|Frank-Wolve | polynomial $O(polylog(1/\epsilon))$ | first  derivative and <a href="http://cvxr.com/cvx/">CVX <a> package |  |
+|Frank-Wolve | polynomial $O(polylog(1/\epsilon))$ | first order derivative and <a href="http://cvxr.com/cvx/">CVX <a> package |  |
 
 ### Code sample
 (in progress)
@@ -50,7 +50,7 @@ for some known constant $`M`$ and all Hermitian $`X,V`$ where $`X \succeq 0 `$. 
 (in progress)
 
 ### History
-- January 2024: Public release
+- January 2024: public release
 - June 2022: start development
 
 ### References
