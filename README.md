@@ -13,7 +13,7 @@ The present algorithm finds solutions to convex optimisation problems of the for
                                   &\ X \succeq 0
 \end{align}
 ```
-where $`X\in \mathrm{H(d)}`$ is a hermitian matrix of dimension $`d`$ of subject to *semidefinite constraints* and $` f(X)`$ is a convex *concordant* real matrix function defined on the positive semidefinite cone.
+where $`X\in \mathrm{H(d)}`$ is a hermitian matrix of dimension $`d`$ of subject to *semidefinite constraints* and $` f(X)`$ is a convex *concordant* real matrix function defined on the positive semidefinite cone. It  solves the corresponding maximiation problem for concave functions.
 
 ### Function library
 Library of *concordant* matrix functions 
