@@ -25,12 +25,14 @@ Library of *concordant* matrix functions
 | keyrate Renyi entropy | $`q_{\alpha}(X) = \sum_{i} \mathrm{tr}[(K_{i} X^{\frac{1}{\alpha}} K_{i}^\dagger)^\alpha] `$|concave| $`\sum_{i} K_{i}^\dagger K_{i} = \mathbf{1}`$ |
 
 
->A real convex or concave matrix functions is *concordant* if it satisfies the following third order condition
+---
+A real convex or concave matrix functions is *concordant* if it satisfies the following third order condition
 ```math
 d^3 f(X)[V] \leq M |V|_X \cdot |d^2 f(X)[V]|
 ```
->for some known constant $`M`$ and for all $`X \in P(d)\succ 0, V\in H(d)`$, where $`d^k f(X)[V]`$ is the $k$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$. The set of convex (or concave) *concordant* functions is closed under addition, muliplication by a positive constant, and the transformation $f(X)\mapsto f(AXA^\dagger)$.
+for some known constant $`M`$ and for all $`X \in P(d)\succ 0, V\in H(d)`$, where $`d^k f(X)[V]`$ is the $k$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$. The set of convex (or concave) *concordant* functions is closed under addition, muliplication by a positive constant, and the transformation $f(X)\mapsto f(AXA^\dagger)$.
 
+---
 
 ### Solvers 
 
@@ -47,6 +49,7 @@ d^3 f(X)[V] \leq M |V|_X \cdot |d^2 f(X)[V]|
 
 ### History
 June 2022: start development
+
 January 2024: public release
 
 ### References
