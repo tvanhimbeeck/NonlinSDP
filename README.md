@@ -15,6 +15,7 @@ The present algorithm finds solutions to convex optimisation problems of the for
 ```
 where $`X\in \mathrm{H(d)}`$ is a hermitian matrix of dimension $`d`$ of subject to *semidefinite constraints* and $` f(X)`$ is a convex *concordant* real matrix function defined on the positive semidefinite cone.
 
+---
 ### Function library
 Library of *concordant* matrix functions 
 | Function | formula | concavity | condition |
@@ -26,6 +27,7 @@ Library of *concordant* matrix functions
 
 
 ---
+### Concordance
 A real convex or concave matrix functions is *concordant* if it satisfies the following third order condition
 ```math
 d^3 f(X)[V] \leq M |V|_X \cdot |d^2 f(X)[V]|
