@@ -7,19 +7,19 @@ Copyright (C) 2024 Thomas Van Himbeeck (Licence: GLPv3)
 The present algorithm finds solutions to convex optimisation problems of the form
 ```math
 \begin{align}
-            \text{minimize}_{X}: & f(X)\\
-            \text{subject to}:   & tr[X A_i] = b_i\\
-                                & tr[X C_j] <= d_j\\
-                                & X >=0
+            \text{minimize}_{X} : &\  f(X)\\
+            \text{subject to} :   &\ \mathrm{tr}[X A_i] = b_i\\
+                                  &\ \mathrm{tr}[X C_j] <= d_j\\
+                                  &\ X >=0
 \end{align}
 ```
 where 
 - $`X\in \mathrm{H}`$ is a hermitian matrix of subject to **semidefinite constraints**
 - $`f(X)`:\mathrm{H} \rightarrow \mathbb{R}$ is a convex real matrix function **compatible with the semidefinite barier**: 
 ```math
-d^3 f(X)[V] \leq d^2 f(X)[V] |V|_X
+for all $`d^2 f(X)[V] \leq d^2 f(X)[V] |V|_X \qquad \text{, for all } X \succ 0, V
 ```
-for all $`X \succ 0`$
+where $`d^k f(X)[V]`$ is the $`k`$th directional (Frechet) derivative.
 
 ## Function library
 The solver provides a library of functions
