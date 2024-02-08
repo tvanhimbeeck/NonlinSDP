@@ -5,22 +5,25 @@ with applications to key rate calculations in  *Quantum Key Distribution* and ot
 
 Copyright (C) 2024 Thomas Van Himbeeck (Licence: GLPv3)
 
-## Applications
-
-### Convex optimisation problems
+## Convex nonlinear semidefinite programming 
 The present algorithm finds solutions to convex optimisation problems of the form
 ```math
-f(x)
-```
-$$\begin{align}
+\begin{align}
             \minimize_{X}   &f(X)
             \mathrm{subject to}   &tr[X A_i] = b_i
                            &tr[X C_j] <= d_j
                            &X >=0
-\end{align}$$
-where *f(X)* is a **convex matrix function** and *X* is a hermitian matrix of subject to **semidefinite constraints**, ie. it is positive semidefinite (*X >=0*) and satisfies linear equality and inequality constraints. This is also known as *convex nonlinear semidefinite programming*.
+\end{align}
+```
+where 
+- $`X`$ is a hermitian matrix of subject to **semidefinite constraints**: it is positive semidefinite ($`X \subsec 0`$) and satisfies linear equality and inequality constraints
+- $`f(X)`$ is a convex real matrix function on the positive semidefinite cone satisfying the concordance property
+```math
+d^3 f(X)[V] \leq d^2 f(X)[V] ||X^{-1/2}VX^{-1/2}||_2
+```
 
-### Function library
+
+## Function library
 The solver provides a library of functions
 
 | Function | formula | concavity |
