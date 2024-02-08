@@ -1,0 +1,12 @@
+\documentclass[preview]{standalone}
+\usepackage{my_note}
+\begin{document}
+
+\begin{IEEEeqnarray*}{L'L}
+	\minimize_{X} 	& f(X)\\
+	\st {}			& \tr[X A_i] = b_i\\
+					& \tr[X C_j] \leq d_j\\
+					& X \succeq 0
+\end{IEEEeqnarray*}
+
+\end{document}
