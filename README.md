@@ -15,11 +15,11 @@ The present algorithm finds solutions to convex optimisation problems of the for
 ```
 where 
 - $`X\in \mathrm{H(d)}`$ is a hermitian matrix of dimension d of subject to **semidefinite constraints**
-- $`f(X)`:\mathrm{H(d)} \rightarrow \mathbb{R}$ is a convex real matrix function **compatible with the semidefinite barier**: 
+- $`f(X)`:\mathrm{H(d)} \rightarrow \mathbb{R}`$ is a convex real matrix **compatible with the semidefinite barier**, ie.\ such that
 ```math
-for all $`d^2 f(X)[V] \leq d^2 f(X)[V] |V|_X \qquad \text{, for all } X \succ 0, V\in H(d)
+d^2 f(X)[V] \leq d^2 f(X)[V] |V|_X \qquad \text{, for all } X \succ 0, V\in H(d)
 ```
-where $`d^k f(X)[V]`$ is the $`k`$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2}`$
+where $`d^k f(X)[V]`$ is the $`k`$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$
 
 ## Function library
 The solver provides a library of functions
