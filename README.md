@@ -1,9 +1,9 @@
-## NonlinSDP
+## <img src="development/img/Logo_v1.svg">
 Interior-point solver for convex nonlinear optimisation over the semidefinite cone.
 
 Copyright (C) 2024 Thomas Van Himbeeck (Licence: GLPv3)
 
-### Convex nonlinear semidefinite programming 
+### Convex nonlinear semidefinite programming
 The present algorithm finds solutions to convex optimisation problems of the form
 ```math
 \begin{align}
@@ -16,7 +16,7 @@ The present algorithm finds solutions to convex optimisation problems of the for
 where $`X\in \mathrm{H(d)}`$ is a hermitian matrix of dimension $`d`$ of subject to *semidefinite constraints* and $` f(X)`$ is a convex *concordant* real matrix function defined on the positive semidefinite cone. It  solves the corresponding maximiation problem for concave functions.
 
 ### Function library
-Library of *concordant* matrix functions 
+Library of *concordant* matrix functions
 | Function | formula | concavity | condition |
 | -------- |-------- | --------- | --------- |
 | von Neumann entropy | $`S(X) = \mathrm{tr}[ X \log(X)]`$  | concave | |
@@ -36,7 +36,7 @@ for some known constant $`M`$ and all Hermitian $`X,V`$ where $`X \succeq 0 `$. 
 
 ---
 
-### Solvers 
+### Solvers
 
 | Type | Convergence | requirements | reference |
 | -- | -- | -- | -- |
