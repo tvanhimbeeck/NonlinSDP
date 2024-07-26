@@ -8,16 +8,18 @@
 %   compose_lincomb( f,a ) assumes K{i} = 1
 
 function f2 = compose_lincomb( varargin )
+    
     f = varargin{1};
+    
     if nargin >= 2
         a = varargin{2};
     else
-        a = repmat([1],1,length(f));
+        a = repmat([1],1,length(f)); % default array a
     end
     if nargin == 3
         K = varargin{3};
     else
-        K = repmat({1},1,length(f));
+        K = repmat({1},1,length(f)); % default cell array K
     end
     
     f2.fun  = @(X)    ( fun(f,a,K,X) );

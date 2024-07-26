@@ -18,7 +18,7 @@ end
 
 function fval = fun( K,rho )
     
-    fval = - VNent( rho_p );
+    fval = - VNent( rho );
     for k = 1:length(K)
         fval = fval + VNent( K{k}*rho*K{k}' );
     end

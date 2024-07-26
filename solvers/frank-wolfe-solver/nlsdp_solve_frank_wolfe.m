@@ -37,7 +37,7 @@ function [X1,pval,output] = nlsdp_solve_frank_wolfe(X0,f,Aeq,beq,A,b,options)
     cvx_end
     
     % initialise main loop
-    X = X0;
+    X = full(X0);
     pval = f.fun(X);
     eps = options.epsilon;
     eps_iter = Inf;
@@ -81,7 +81,7 @@ function [V,dval] = FW_iteration(X,f,Aeq,beq,A,b)
     elseif strcmp( f.conv,'concave' )
         c = -1;
     end
-    X = (X +X')/2;
+    X = full((X +X')/2);
     d = length(X);
     grad = f.diff(X);
     grad = (grad + grad')/2;

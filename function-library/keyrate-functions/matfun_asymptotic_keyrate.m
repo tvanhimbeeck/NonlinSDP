@@ -9,7 +9,7 @@ function f2 = matfun_asymptotic_keyrate( krausP,krausP_K )
     
     P = length(krausP);
     for p = 1:P
-        f{p} = matfun_H( krausP_K );
+        f{p} = matfun_H( krausP_K{p} );
     end
     f2 = compose_lincomb( f,ones(1,P),krausP );
     
