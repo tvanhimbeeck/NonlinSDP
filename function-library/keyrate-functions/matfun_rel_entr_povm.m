@@ -5,17 +5,17 @@
 %       - D(q||p) is the relative entropy for probability distributions 
 %       - q_i[X] = Tr[ POVM{i}*X ]
 
-function f = matfun_rel_entr_keyrate( q0,POVM )
+function f = matfun_rel_entr_povm( q0,POVM )
   
     f.fun = @(X)   ( fun ( X,q0,POVM ) );
     f.diff = @(X)  ( diff( X,q0,POVM ) );
     f.hess = @(X,V)( hess( X,V,POVM ) );
-    f.conv = 'convex'; % not used
+    f.conv = 'convex';
     f.beta = 1;
     f.input = 'matrix'; % not used
 end
 
-function fval = fun(X,q0,POVM)
+function fval = fun( X,q0,POVM )
     for i = 1:length(POVM)
         q(i) = trace(POVM{i}*X);
     end
@@ -23,7 +23,7 @@ function fval = fun(X,q0,POVM)
     fval = real(fval);
 end
 
-function grad = diff(X,q0,POVM)
+function grad = diff( X,q0,POVM )
     grad = 0;
     for i = 1:length(POVM)
         q(i) = trace(POVM{i}*X);
@@ -32,8 +32,9 @@ function grad = diff(X,q0,POVM)
     grad = (grad+grad')/2;
 end
 
-function HX = hess(X,V,POVM)
+function HX = hess( X,V,POVM )
 %       To be completed
+
 %     HX = zeros(length(X));
 %     for i = 1:length(POVM)
 %         q(i) = trace(POVM{i}*X);

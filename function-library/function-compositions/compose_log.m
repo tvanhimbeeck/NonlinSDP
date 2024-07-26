@@ -1,4 +1,4 @@
-%% f2 = compose_with_log( f1,a )
+%% f2 = compose_log( f1,a )
 % Copyright (C) 2023 Thomas Van Himbeeck (Licence: GLPv3)
 %
 % Constructs the convex/concave matrix function 
@@ -7,7 +7,7 @@
 %       - f1 is a concave matrix function
 %       - a is a real coefficient
 
-function f2 = compose_with_log( f1,a )
+function f2 = compose_log( f1,a )
     
     if ~strcmp( f1.conv,'concave' )
         f2 = [];

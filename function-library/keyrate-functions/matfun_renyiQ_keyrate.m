@@ -1,9 +1,9 @@
-%% f = matfun_renyiQ_keyrate( beta,input,type )
+%% f = matfun_renyiQdown_keyrate( beta,krausP,krausP_K )
 % Copyright (C) 2022 Thomas Van Himbeeck (Licence: GLPv3)
 %
 % Implements the function
-%       h(X) = - sum_{pk} Tr[ (K_kp X^(1/alpha) K_kp')^alpha]
-% with rho_p = K_p rho K_p'
+%       h(rho) = - sum_{pk} Tr[ (krausP_K{k}{p} rho_p^(1/alpha) krausP_K{k}{p}')^alpha]
+% with rho_p = krausP{p} rho krausP{p}'
 
 function f = matfun_renyiQ_keyrate( beta,krausP,krausP_K )
 
@@ -11,5 +11,6 @@ function f = matfun_renyiQ_keyrate( beta,krausP,krausP_K )
     for p = 1:P
         funp{p} = matfun_K( beta,krausP_K{p} );
     end
-    f = matfun_lincomb( funp,ones(1,P),krausP );
+    f = compose_lincomb( funp,ones(1,P),krausP );
+    
 end

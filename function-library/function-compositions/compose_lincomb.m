@@ -1,15 +1,30 @@
-%% f3 = matfun_lincomb( f,a,K )
-% constructs the matrix function 
-%   	f3(X) := sum_i a(i) * f{i}( K{i}*X*K{i}' ) 
-% if the convexities match
+%% f2 = compose_lincomb( f,a,K )
+% Constructs the matrix function 
+%   	f2(X) := sum_i a(i) * f{i}( K{i}*X*K{i}' ) 
+% if the convexities match.
+% 
+% Variantions with 1 or 2 inputs
+%   compose_lincomb( f ) assumes a(i) = 1, K{i} = 1
+%   compose_lincomb( f,a ) assumes K{i} = 1
 
-function f3 = matfun_lincomb( f,a,K )
+function f2 = compose_lincomb( varargin )
+    f = varargin{1};
+    if nargin >= 2
+        a = varargin{2};
+    else
+        a = repmat([1],1,length(f));
+    end
+    if nargin == 3
+        K = varargin{3};
+    else
+        K = repmat({1},1,length(f));
+    end
     
-    f3.fun  = @(X)    ( fun(f,a,K,X) );
-    f3.diff = @(X)    ( diff(f,a,K,X) );
-    f3.hess = @(X,V)  ( hess(f,a,K,X,V) );
-    f3.beta = max_beta( f );
-    f3.conv = convexity_sum( f,a );
+    f2.fun  = @(X)    ( fun(f,a,K,X) );
+    f2.diff = @(X)    ( diff(f,a,K,X) );
+    f2.hess = @(X,V)  ( hess(f,a,K,X,V) );
+    f2.beta = max_beta( f );
+    f2.conv = convexity_sum( f,a );
     
 end
 
