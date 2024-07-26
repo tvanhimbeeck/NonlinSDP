@@ -32,7 +32,7 @@ A real convex matrix functions is *concordant* if it satisfies the following thi
 ```math
 d^3 f(X)[V] \leq M |V|_X \cdot d^2 f(X)[V]
 ```
-for some known constant $`M`$ and all Hermitian $`X,V`$ where $`X \succeq 0 `$. Here $`d^k f(X)[V]`$ is the $k$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$.  The set of convex (or concave) *concordant* functions is closed under addition, muliplication by a positive constant, and the transformation $f(X)\mapsto f(AXA^\dagger)$. A concave concordant function is a convex concordant function times a negative constant.
+for some known constant $`M`$ and all Hermitian $`X,V`$ where $`X \succeq 0 `$. Here $`d^k f(X)[V]`$ is the $`k`$th directional (Frechet) derivative and $`|V|_X = ||X^{-\frac{1}{2}} V X^{-\frac{1}{2}}||_2`$. The set of convex (or concave) *concordant* functions is closed under addition, muliplication by a positive constant, and the transformation $f(X)\mapsto f(AXA^\dagger)$. A concave concordant function is a convex concordant function times a negative constant.
 
 ---
 
