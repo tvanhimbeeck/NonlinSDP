@@ -12,10 +12,8 @@
 
 function [obj,x1,output] = ipsolve_set( c,F,x0,A,b,options )
         
-    % Solver default options
-    
+    % Set solver default options
     options = set_defaults(options);
-    
     
     % Convergence timing
     tic
@@ -84,7 +82,7 @@ function [obj,x1,output] = ipsolve_set( c,F,x0,A,b,options )
 
     xnew = y - newton_stepC( g,H,A,db,v,options );
     
-    if checks( F,xnew,A,b,0,count1+count2,options,'Initial point' )<0
+    if checks( F,xnew,A,b,0,count1+count2,options,'Iteration' )<0
         x1 = x; obj = c'*x; options.flag = -1; return;
     end
     
@@ -218,7 +216,11 @@ function [delta,lambda]= newton_stepC( g,H,A,db,v,options )
         delta = zold(1:d);
     end
     mu = z(d+1:d+n);
-    lambda = sqrt(z'*M*z);
+    if abs(z'*M*z)<1e-10
+        lambda = 0;
+    else
+        lambda = sqrt(z'*M*z);
+    end
     fun = @(x)(1/(1+(x^2/(1+x))));
     delta = delta * fun(lambda);
 end
@@ -252,7 +254,7 @@ end
 function [] = print_welcome(options)
 
     if strcmp(options.verbose,'iterations')||strcmp(options.verbose,'real-time')
-        fprintf('slsdp-solver (C) 2023 Thomas Van Himbeeck');
+        fprintf('NonlinSDP solver (C) 2023 Thomas Van Himbeeck');
         fprintf('\n\n');
         fprintf('|iter|   fval   | eps/lambda|  dual val |');
         %fprintf('\n')

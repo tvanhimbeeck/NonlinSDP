@@ -13,7 +13,7 @@
 
 function [f_opti,x_opti,output] = ipsolve_fun( f,phi,x0,Aeq,beq,A,b,options )
     
-    delta = 0.01; % chosen arbitrarily
+    delta = 0.1; % chosen arbitrarily
     d = length(x0);
     F1 = epigraph_barrier( f,phi,d,f.fun(x0)+2*delta );
     F2 = gen_ineqconsbarrier([A,zeros(size(A,1),1)],b);

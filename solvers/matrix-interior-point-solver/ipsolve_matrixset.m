@@ -7,7 +7,7 @@
 %                   X>= 0
 %                   tr(Aeq{i}*X) = beq{i}
 %
-% where f,F are convex matrix and g is a convex scalar function
+% where f,F are convex matrix function and g is a convex scalar function
 
 function [X1,fval,output] = ipsolve_matrixset( X0,f,g,F,Aeq,beq,options )
     
