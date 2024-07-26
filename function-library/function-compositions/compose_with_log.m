@@ -16,7 +16,7 @@ function f2 = compose_with_log( f1,a )
         f2.fun = @(X)( a*log( f1.fun( X ) ) );
         f2.diff = @(X)( a*f1.diff(X)/f1.fun(X) );
         f2.hess = @(X,V) ( a*( f1.hess(X,V)/f1.fun(X) - f1.diff(X)*inner_prod( V,f1.diff(X) )/(f1.fun(X)^2 ) ) );
-        f2.beta = 5; %% complete guess
+        f2.beta = 0; %% not concordant
         if a >= 0
             f2.conv = 'concave';
         elseif a < 0

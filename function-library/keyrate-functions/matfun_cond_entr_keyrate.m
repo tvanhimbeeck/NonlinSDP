@@ -4,78 +4,79 @@
 % Builds the keyrate function object, which can be specified in terms of POVM elements 
 %   - type = 'povm'
 %   - input = two index cell containing POVM elements
-% or in terms of Kraus operators
+% or in terms of kraus operators
 %   - type = 'kraus'
-%   - input = two index cell containing Kraus operators
-% For non-full rank POVM's Kraus operators
+%   - input = two index cell containing kraus operators
+% For non-full rank POVM's kraus operators
 % can be computed but for non full rank POVM
 %
 function f = matfun_cond_entr_keyrate( input, type )
     
     if strcmp(type,'povm') %POVM type input
-        [KrausKP,KrausP] = gen_kraus( input );
-    elseif strcmp(type,'kraus') % KRAUS type input
-        KrausKP = input{1};
-        KrausP = input{2};
+        [krausP_K,krausP] = gen_kraus( input ); %% needs modification
+    elseif strcmp(type,'kraus') % kraus type input
+        krausP = input{1};
+        krausP_K = input{2};
     end
-    d = size(KrausP,2);
+    d = size(krausP,2);
     
     load tau_r8_zeros
     
-    f.fun = @(rho)   ( cond_entropy_fun(      rho,  KrausKP,KrausP ) );
-    f.diff = @(rho)  ( cond_entropy_diff( rho,  KrausKP,KrausP ) );
-    f.hess = @(rho,X)( cond_entropy_hess( rho,X,KrausKP,KrausP,pzero,qzero ) );
+    f.fun = @(rho)   ( cond_entropy_fun(  rho,  krausP_K,krausP ) );
+    f.diff = @(rho)  ( cond_entropy_diff( rho,  krausP_K,krausP ) );
+    f.hess = @(rho,X)( cond_entropy_hess( rho,X,krausP_K,krausP,pzero,qzero ) );
     f.conv = 'convex';
     f.beta = 1;
 end
 
-function fval = cond_entropy_fun( rho,KrausKP,KrausP )
+function fval = cond_entropy_fun( rho,krausP_K,krausP )
     
-    [K,P] = size(KrausKP);
+    P = length(krausP);
     fval = 0;
     for p = 1:P
-        rho_p = KrausP{p}*rho*KrausP{p}';
+        rho_p = krausP{p}*rho*krausP{p}';
         fval = fval - VNent( rho_p );
-        for k = 1:K
-            fval = fval + VNent( KrausKP{k,p}*rho_p*KrausKP{k,p}' );
+        for k = 1:length(krausP_K{p})
+            fval = fval + VNent( krausP_K{p}{k}*rho_p*krausP_K{p}{k}' );
         end
     end
     fval = real(fval);
 end
 
-function grad = cond_entropy_diff( rho,KrausKP,KrausP )
+function grad = cond_entropy_diff( rho,krausP_K,krausP )
     
-    [K,P] = size(KrausKP);
+    P = length(krausP_K);
     grad = 0;
     for p = 1:P
-        rho_p = KrausP{p}*rho*KrausP{p}';
-        grad = grad + KrausP{p}'*logm( rho_p )*KrausP{p};
-        for k = 1:K
-            grad = grad - KrausP{p}'*KrausKP{k,p}'*logm( KrausKP{k,p}*rho_p*KrausKP{k,p}' )*KrausKP{k,p}*KrausP{p};
+        rho_p = krausP{p}*rho*krausP{p}';
+        grad = grad + krausP{p}'*logm( rho_p )*krausP{p};
+        for k = 1:length(krausP_K{p})
+            grad = grad - krausP{p}'*krausP_K{p}{k}'*logm( krausP_K{p}{k}*rho_p*krausP_K{p}{k}' )*krausP_K{p}{k}*krausP{p};
         end
     end
     grad = (grad+grad')/2;
     
 end
 
-function HX = cond_entropy_hess( rho,X,KrausKP,KrausP,pzero,qzero )
-    [K,P] = size(KrausKP);
+function HX = cond_entropy_hess( rho,X,krausP_K,krausP,pzero,qzero )
+    
+    P = length(krausP_K);
     D = length(rho);
     HX = zeros( D );
     for p = 1:P
-        HX = HX + KrausP{p}'*...
+        HX = HX + krausP{p}'*...
                         logm_frechet_pade_herm(...
-                            KrausP{p}*rho*KrausP{p}',...
-                            KrausP{p}*X*KrausP{p}',...
+                            krausP{p}*rho*krausP{p}',...
+                            krausP{p}*X*krausP{p}',...
                             pzero,qzero)*...
-                        KrausP{p};
-        for k = 1:K
-            HX = HX - KrausP{p}'*KrausKP{k,p}'*...
+                        krausP{p};
+        for k = 1:length(krausP_K{p})
+            HX = HX - krausP{p}'*krausP_K{p}{k}'*...
                             logm_frechet_pade_herm(...
-                                KrausKP{k,p}*KrausP{p}*rho*KrausP{p}'*KrausKP{k,p}',...
-                                KrausKP{k,p}*KrausP{p}*X*KrausP{p}'*KrausKP{k,p}',...
+                                krausP_K{p}{k}*krausP{p}*rho*krausP{p}'*krausP_K{p}{k}',...
+                                krausP_K{p}{k}*krausP{p}*X*krausP{p}'*krausP_K{p}{k}',...
                                 pzero,qzero)*...
-                            KrausKP{k,p}*KrausP{p};
+                            krausP_K{p}{k}*krausP{p};
         end
     end
     HX = (HX + HX')/2;
