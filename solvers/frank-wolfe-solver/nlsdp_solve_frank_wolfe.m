@@ -3,9 +3,9 @@
 
 function [X1,pval,output] = nlsdp_solve_frank_wolfe(X0,f,Aeq,beq,A,b,options)
 
+   
     
-    % default options
-    print_welcome
+    % set default options
     if ~isfield(options,'epsilon')
         options.epsilon = 1e-4;
     end
@@ -13,34 +13,57 @@ function [X1,pval,output] = nlsdp_solve_frank_wolfe(X0,f,Aeq,beq,A,b,options)
         options.verbose = 'iterations';
     end
     
-    % solver
+    % initialise printed output
+    print_welcome
     
-    eps = options.epsilon;
+    % initialise timer
     tic
+    
+    % find feasible initial point
+    d = length(X0);
+    cvx_begin sdp quiet
+        variable X0(d,d) hermitian
+        variable t
+        maximise t
+        subject to
+            X0 >= t*eye(d);
+            t >= 0;
+            for i = 1:length(A)
+                trace(X0*A{i}) <= b(i);
+            end
+            for i = 1:length(Aeq)
+                trace(X0*Aeq{i}) == beq(i);
+            end
+    cvx_end
+    
+    % initialise main loop
     X = X0;
     pval = f.fun(X);
+    eps = options.epsilon;
     eps_iter = Inf;
+    iter = 0;
     tstamps = [];
     epsstamps = [];
     
     print_columns( options );
-    iter = 0;
     print_update( iter,pval,[],[],options )
+    
     while eps_iter > eps
         [V,dval] = FW_iteration(X,f,Aeq,beq,A,b);
-        
-        
+        options2 = optimset('TolFun',options.epsilon/2);
         if strcmp( f.conv,'convex' )
             linfun = @(t)(f.fun(X+t*V));
-            [t,pval] = fminbnd(linfun,0,1);
+            [t,pval] = fminbnd(linfun,0,1,options2);
         elseif strcmp( f.conv,'concave' )
             linfun = @(t)(-f.fun(X+t*V));
-            [t,pval] = fminbnd(linfun,0,1);
+            [t,pval] = fminbnd(linfun,0,1,options2);
             pval = -pval;
         end
+        %[t,pval,dval,max(eig(V))]
         pval = real(pval);
         X = X + t*V;
         eps_iter = abs(pval - dval);
+        iter = iter + 1;
         print_update( iter,pval,eps_iter,dval,options )
         
         % convergence timing
@@ -78,7 +101,7 @@ function [V,dval] = FW_iteration(X,f,Aeq,beq,A,b)
     dval = real(f.fun(X)+c*real(trace(grad*V)));
 end
 function [] = print_welcome()
-    fprintf('quantum-ip-solver (C) 2023 Thomas Van Himbeeck\n\n')
+    fprintf('NonlinSDP (C) 2023 Thomas Van Himbeeck\n\n')
 end
 function [] = print_columns( options )
     if strcmp(options.verbose,'iterations') 
