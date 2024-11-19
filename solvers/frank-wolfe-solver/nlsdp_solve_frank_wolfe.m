@@ -3,8 +3,6 @@
 
 function [X1,pval,output] = nlsdp_solve_frank_wolfe(X0,f,Aeq,beq,A,b,options)
 
-   
-    
     % set default options
     if ~isfield(options,'epsilon')
         options.epsilon = 1e-4;
@@ -14,7 +12,7 @@ function [X1,pval,output] = nlsdp_solve_frank_wolfe(X0,f,Aeq,beq,A,b,options)
     end
     
     % initialise printed output
-    print_welcome
+    print_welcome()
     
     % initialise timer
     tic
@@ -49,7 +47,7 @@ function [X1,pval,output] = nlsdp_solve_frank_wolfe(X0,f,Aeq,beq,A,b,options)
     print_update( iter,pval,[],[],options )
     
     while eps_iter > eps
-        [V,dval] = FW_iteration(X,f,Aeq,beq,A,b);
+        [V,dval,y] = FW_iteration(X,f,Aeq,beq,A,b);
         options2 = optimset('TolFun',options.epsilon/2);
         if strcmp( f.conv,'convex' )
             linfun = @(t)(f.fun(X+t*V));
@@ -73,9 +71,10 @@ function [X1,pval,output] = nlsdp_solve_frank_wolfe(X0,f,Aeq,beq,A,b,options)
     end
     X1 = X;
     output.eps_iter = eps_iter;
+    output.lagrangemultiplier = y;
 end
 
-function [V,dval] = FW_iteration(X,f,Aeq,beq,A,b)
+function [V,dval,y] = FW_iteration(X,f,Aeq,beq,A,b)
     if strcmp( f.conv,'convex' )
         c = 1;
     elseif strcmp( f.conv,'concave' )
@@ -87,6 +86,7 @@ function [V,dval] = FW_iteration(X,f,Aeq,beq,A,b)
     grad = (grad + grad')/2;
     cvx_begin sdp quiet
         variable Xp(d,d) hermitian
+        dual variable y(length(Aeq),1)
         minimize c*trace(Xp*grad)
         subject to
             Xp >= 0;
@@ -94,14 +94,16 @@ function [V,dval] = FW_iteration(X,f,Aeq,beq,A,b)
                 trace(Xp*A{i}) <= b(i);
             end
             for i = 1:length(Aeq)
-                trace(Xp*Aeq{i}) == beq(i);
+                y(i): trace(Xp*Aeq{i}) == beq(i);
             end
     cvx_end
     V = value(Xp) - X;
     dval = real(f.fun(X)+c*real(trace(grad*V)));
 end
 function [] = print_welcome()
-    fprintf('NonlinSDP (C) 2023 Thomas Van Himbeeck\n\n')
+    fprintf('\n')
+    fprintf('NonlinSDP (C) 2024 Thomas Van Himbeeck\n')
+    fprintf('Frank-Wolfe solver\n')
 end
 function [] = print_columns( options )
     if strcmp(options.verbose,'iterations') 
