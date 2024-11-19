@@ -1,7 +1,7 @@
 %% f = matfun_H( K )
 % Copyright (C) 2022 Thomas Van Himbeeck (Licence: GLPv3)
 %
-% Implements the concave function
+% Implements the convex function
 %       f(X) =  sum_{x} S(K_x X K_x') - S(X)
 % with K a family of kraus operators such that sum_k K{k}'*K{k} = id
 %
@@ -12,7 +12,7 @@ function f = matfun_H( K )
     f.fun = @(rho)   ( fun(  K,rho ) );
     f.diff = @(rho)  ( diff( K,rho ) );
     f.hess = @(rho,X)( hess( K,rho,X,pzero,qzero ) );
-    f.conv = 'concave';
+    f.conv = 'convex';
     f.beta = 1;
 end
 
