@@ -60,17 +60,22 @@ end
 
 function conv = convexity_sum( f,a )
     
-    % check matching convexities
+    % define the convexity of a(i)f{i}
     for i = 1:length(f) 
-        if strcmp(f{i}.conv,'concave')
+        if a(i)==0||strcmp(f{i}.conv,'linear')
+            c(i)=0;
+        elseif strcmp(f{i}.conv,'concave')
             c(i) = -sign(a(i));
         elseif strcmp(f{i}.conv,'convex')
             c(i) = sign(a(i));
         end
     end
-    if c >= ones(1,length(f))
+    % check matching convexities
+    if c == zeros(1,length(f))
+        conv = 'linear';
+    elseif c >= 0
         conv = 'convex';
-    elseif c == -ones(1,length(f))
+    elseif c <= 0
         conv = 'concave';
     else
         fprintf( 'forbidden composition\n' )

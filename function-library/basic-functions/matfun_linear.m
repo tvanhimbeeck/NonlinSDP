@@ -6,7 +6,7 @@ function f = matfun_linear(A)
     f.fun = @(X)   ( linear_fun ( X,A ) );
     f.diff = @(X)  ( linear_diff( X,A ) );
     f.hess = @(X,V)( linear_hess( X,V,A ) );
-    f.conv = 'convex';
+    f.conv = 'linear';
     f.beta = 0;
 end
 
