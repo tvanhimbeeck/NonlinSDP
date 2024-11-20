@@ -71,7 +71,7 @@ function [X1,pval,output] = nlsdp_solve_frank_wolfe(X0,f,Aeq,beq,A,b,options)
     end
     X1 = X;
     output.eps_iter = eps_iter;
-    output.lagrangemultiplier = y;
+    output.lagrangemultiplier = cell2mat(y);
 end
 
 function [V,dval,y] = FW_iteration(X,f,Aeq,beq,A,b)
@@ -86,7 +86,7 @@ function [V,dval,y] = FW_iteration(X,f,Aeq,beq,A,b)
     grad = (grad + grad')/2;
     cvx_begin sdp quiet
         variable Xp(d,d) hermitian
-        dual variable y(length(Aeq),1)
+        dual variable y{length(Aeq)}
         minimize c*trace(Xp*grad)
         subject to
             Xp >= 0;
@@ -94,7 +94,7 @@ function [V,dval,y] = FW_iteration(X,f,Aeq,beq,A,b)
                 trace(Xp*A{i}) <= b(i);
             end
             for i = 1:length(Aeq)
-                y(i): trace(Xp*Aeq{i}) == beq(i);
+                y{i}: trace(Xp*Aeq{i}) == beq(i);
             end
     cvx_end
     V = value(Xp) - X;
