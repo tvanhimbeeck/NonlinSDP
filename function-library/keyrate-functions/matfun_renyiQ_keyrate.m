@@ -1,4 +1,4 @@
-%% f = matfun_renyiQdown_keyrate( beta,krausP,krausP_K )
+%% f = matfun_renyiQ_keyrate( beta,krausP,krausP_K )
 % Copyright (C) 2022 Thomas Van Himbeeck (Licence: GLPv3)
 %
 % Implements the function
@@ -12,5 +12,4 @@ function f = matfun_renyiQ_keyrate( beta,krausP,krausP_K )
         funp{p} = matfun_K( beta,krausP_K{p} );
     end
     f = compose_lincomb( funp,ones(1,P),krausP );
-    
 end
