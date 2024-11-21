@@ -98,7 +98,7 @@ function [V,dval,y] = FW_iteration(X,f,Aeq,beq,A,b)
             end
     cvx_end
     V = value(Xp) - X;
-    dval = real(f.fun(X)+c*real(trace(grad*V)));
+    dval = real(f.fun(X)+real(trace(grad*V)));
 end
 function [] = print_welcome()
     fprintf('\n')
@@ -110,7 +110,6 @@ function [] = print_columns( options )
         fprintf('|iter|   fval   |    eps    |  dual val |\n');
     end
 end
-
 function [] = print_update(count,primal,eps,dual,options)
     
     scount = num2str(count,'%4u');
