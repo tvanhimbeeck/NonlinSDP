@@ -6,7 +6,7 @@
 %                + (1-gamma) sum_{pk} Tr[ (krausP_K{k}{p} rho_p^(1/alpha) krausP_K{k}{p}')^alpha]
 % with rho_p = krausP{p} rho krausP{p}' and alpha = 1+beta
 
-function fun = matfun_weightedrenyiQ_keyrate( beta,protocol,f,f0 )
+function [fun,fX,fQ] = matfun_weightedrenyiQ_keyrate( beta,protocol,f,f0 )
     
     % test round
     if strcmp( protocol.test,"povm" )
@@ -14,7 +14,7 @@ function fun = matfun_weightedrenyiQ_keyrate( beta,protocol,f,f0 )
         X = cellvecinner(povmZ,exp(beta*f));
     elseif strcmp( protocol.test,"observables" )
         Xfun = protocol.Xfun;
-        X = Xfun(beta*(1-gamma)*y/gamma);
+        X = Xfun(beta*f);
     end
     fX = matfun_linear(X);
     
